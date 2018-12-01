@@ -47,13 +47,19 @@ static sqlite3_stmt* stmt_set( char *name )
 	return stmt;
 }
 
-int settings_init( char *path )
+int settings_init( char *path, int wr )
 {
 	sqlite3_stmt* stmt;
+	int r;
 
 	if( db != NULL )
 		return -1;
-	if( sqlite3_open( path, &db ) != SQLITE_OK )
+
+	if( wr )
+		r = sqlite3_open( path, &db );
+	else
+		r = sqlite3_open_v2( path, &db, SQLITE_OPEN_READONLY, NULL );
+	if( r != SQLITE_OK )
 	{
 		fprintf( stderr, "Cannot open %s: %s\n", path, sqlite3_errmsg(db) );
 		db = NULL;

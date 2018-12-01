@@ -2,10 +2,10 @@
 
 #include "settings.h"
 
-int main()
+int main( int argc, char *argv[] )
 {
-	settings_init( "test.db" );
+	settings_init( "test.db", ( argc<2 ) );
 	settings_setInt( "counter", settings_getInt( "counter", 0 ) + 1 );
-	printf( "%s\n", settings_getString( "counter", 0 ) );
+	printf( "%s\n", settings_getString( "counter", "empty" ) );
 	return 0;
 }

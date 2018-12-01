@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-int settings_init( char *path );
+int settings_init( char *path, int wr );
 int settings_setInt( char *name, int value );
 int settings_setString( char *name, char *value );
 int settings_getInt( char *name, int defaultValue );
